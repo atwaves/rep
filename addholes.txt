@@ -1,0 +1,206 @@
+// Add hole path to shape
+		
+		AddHolePath: function( inserted_object ){
+			
+			
+			console.info ( "inserted_object" );
+			console.info ( inserted_object );
+			
+			
+			console.info ( this );
+			
+			var dx = this._global_position.x - inserted_object.global_position.x;
+			var dy = this._global_position.y - inserted_object.global_position.y;
+			
+			
+			
+			
+			
+			
+			// DIFFS
+			
+			
+			var d_in_plane = Math.sqrt ( Math.pow( dx, 2) + Math.pow ( dy, 2));
+			
+			
+			console.info ( " Diff in plane " );
+			console.info ( d_in_plane );
+			
+			
+			
+			console.info ( " " );
+			console.info ( " " );
+			console.info ( " " );
+			
+			console.info ( " THIS WALL GLOBAL POSITION" );
+			
+			console.info ( this._global_position );
+			
+			
+			console.info ( " INSERTED OBJECT GLOBAL POSITION" );
+			console.info ( inserted_object.global_position );
+			
+			
+			console.info ( " INSERTED OBJECT " );
+			console.info ( inserted_object );
+			
+			
+			console.info ( dx );
+			var dz = this._global_position.z - inserted_object.global_position.z;
+
+			console.info ( dz );
+			var holePath = new THREE.Path();
+			
+			
+			
+			
+			
+//			holePath.moveTo ( -100, -100);
+//			holePath.lineTo ( 100, -100);
+//			holePath.lineTo ( 100, 100);
+//			holePath.lineTo ( -100, 100);
+//			holePath.lineTo ( -100, -100);
+			
+			
+			
+
+			var holePoints = [
+
+				new THREE.Vector2( - dx - inserted_object._width / 2, - dz - inserted_object._height / 2 ), // CHANGED - counterclockwise order
+				new THREE.Vector2( - dx + inserted_object._width / 2, - dz - inserted_object._height / 2 ),
+				new THREE.Vector2( - dx + inserted_object._width / 2, - dz + inserted_object._height / 2 ),
+				new THREE.Vector2( - dx - inserted_object._width / 2, - dz + inserted_object._height / 2 )
+
+			];
+			
+			
+			// Counterclockwise order
+			
+			
+			
+			
+			// HEIGHT FROM WALL ZERO LEVEL
+			
+//			var heightz = ( this._global_position.z - this._inside_surface_height/2 ) - ( inserted_object.global_position.z - 
+//				
+//				
+//				
+//				this._level_height + ;
+			
+			
+			
+			var d_in_plane = Math.sqrt ( Math.pow( dx, 2) + Math.pow ( dy, 2));
+			
+			
+			
+			
+			
+			var plane_diff = Math.sqrt ( Math.pow( dx, 2) + Math.pow ( dy, 2) ) ;
+			
+			if ( inserted_object.global_position.x < this._global_position.x ){
+				
+				
+				alert ("qqqq");
+				plane_diff = - plane_diff ;
+				
+				
+			}
+			
+			else if ( inserted_object.global_position.x < this._global_position.x || inserted_object.global_position.y < this._global_position.y ){
+				alert ("qqqq");
+				
+				plane_diff =  plane_diff ;
+				
+				
+			}
+			
+			
+			console.info ( " plane_diff               ");
+			console.info ( " " );
+			console.info ( " " );
+			console.info ( " " );
+			
+			console.info ( plane_diff );
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			var wall_z_center = this._level_height + this._inside_surface_height/2;
+			
+			
+			console.info ( " wall_z_center               ");
+			console.info ( " " );
+			console.info ( " " );
+			console.info ( " " );
+			
+			console.info ( wall_z_center );
+			
+			
+
+			
+			var z_diff = wall_z_center - inserted_object.global_position.z;
+			
+			console.info ( " z_diff               ");
+			console.info ( " " );
+			console.info ( " " );
+			console.info ( " " );
+			
+			console.info ( z_diff );
+			
+			
+			
+			
+			var INS_OBJ_WIDTH = inserted_object.width;
+			
+			
+			
+			var INS_OBJ_HEIGHT = inserted_object.height;
+			
+			
+			
+			
+			var holePoints = [
+				
+				
+				// Bottom points
+				new THREE.Vector2( 0 + plane_diff - INS_OBJ_WIDTH/2, 0 - z_diff - INS_OBJ_HEIGHT/2 ), 
+				new THREE.Vector2( 0 + plane_diff + INS_OBJ_WIDTH/2, 0 - z_diff - INS_OBJ_HEIGHT/2 ),
+				
+				
+				// Top points
+				new THREE.Vector2( 0 + plane_diff + INS_OBJ_WIDTH/2, 0 - z_diff + INS_OBJ_HEIGHT/2 ),
+				new THREE.Vector2( 0 + plane_diff - INS_OBJ_WIDTH/2, 0 - z_diff + INS_OBJ_HEIGHT/2 )
+
+			];
+			
+			
+			//holePath.add ( holePoints );
+			
+			
+//			console.info ( "                         hole                           ");
+//			console.info ( new THREE.Shape ( holePoints ));
+//			
+//
+			return new THREE.Shape ( holePoints );
+			
+			//console.info ( holePath );
+			
+			
+			//return holePath;
+			
+
+		
+		},
